@@ -1,0 +1,47 @@
+name: Scheduled Maintenance
+
+on:
+  schedule:
+    # Run daily at 00:00 UTC
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Configure git
+        run: |
+          git config --global user.name "issueclaw[bot]"
+          git config --global user.email "issueclaw[bot]@users.noreply.github.com"
+
+      - name: Run maintenance
+        run: |
+          bun install --frozen-lockfile
+          bun run scripts/maintenance.ts
+
+      - name: Commit changes
+        run: |
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "issueclaw: scheduled maintenance $(date -u +%Y-%m-%d)"
+            git push origin main
+          else
+            echo "No changes to commit"
+          fi

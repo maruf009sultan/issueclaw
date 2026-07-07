@@ -1,0 +1,37 @@
+node_modules/
+dist/
+coverage/
+.DS_Store
+*.log
+*.tmp
+*.bak
+.tmp/
+*.tsbuildinfo
+
+# State runtime data (keep directory structure, ignore generated contents)
+state/sessions/*.jsonl
+state/issues/*.json
+state/audit.log
+
+# Keep the seed markdown files
+!state/memory.md
+!state/personality.md
+!state/user.md
+!state/README.md
+!state/issues/.gitkeep
+!state/sessions/.gitkeep
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Lockfiles (keep one)
+bun.lock
+package-lock.json

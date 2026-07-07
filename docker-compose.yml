@@ -1,0 +1,25 @@
+services:
+  issueclaw:
+    build: .
+    image: issueclaw:latest
+    container_name: issueclaw
+    volumes:
+      - ./:/app
+      - ./state:/app/state
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
+      - ISSUECLAW_LOG_LEVEL=${ISSUECLAW_LOG_LEVEL:-info}
+      - ISSUECLAW_DRY_RUN=${ISSUECLAW_DRY_RUN:-false}
+    stdin_open: true
+    tty: true
+    entrypoint: ["bun", "run", "src/cli.ts"]
+
+  # Mock GitHub API for testing
+  mock-github:
+    image: node:20-alpine
+    container_name: mock-github
+    command: sh -c "npm install -g http-server && echo 'Mock GitHub ready'"
+    profiles: ["test"]

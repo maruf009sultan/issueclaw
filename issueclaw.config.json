@@ -1,0 +1,67 @@
+{
+  "version": 1,
+  "providers": [
+    {
+      "type": "groq",
+      "model": "llama-3.3-70b-versatile",
+      "apiKey": "${GROQ_API_KEY}",
+      "default": true
+    },
+    {
+      "type": "groq",
+      "model": "llama-3.1-8b-instant",
+      "apiKey": "${GROQ_API_KEY}"
+    },
+    {
+      "type": "gemini",
+      "model": "gemini-2.0-flash",
+      "apiKey": "${GEMINI_API_KEY}"
+    },
+    {
+      "type": "cerebras",
+      "model": "llama-3.3-70b",
+      "apiKey": "${CEREBRAS_API_KEY}"
+    },
+    {
+      "type": "openrouter",
+      "model": "nvidia/nemotron-3-nano-30b-a3b:free",
+      "apiKey": "${OPENROUTER_API_KEY}"
+    },
+    {
+      "type": "anthropic",
+      "model": "claude-opus-4-6",
+      "apiKey": "${ANTHROPIC_API_KEY}",
+      "thinking": "high"
+    },
+    {
+      "type": "openai",
+      "model": "gpt-4o",
+      "apiKey": "${OPENAI_API_KEY}"
+    }
+  ],
+  "memory": {
+    "stateDir": "./state",
+    "autoCompact": true
+  },
+  "github": {
+    "onIssueOpened": true,
+    "onIssueComment": true,
+    "onPullRequest": false,
+    "allowedAssociations": ["OWNER", "MEMBER", "COLLABORATOR"],
+    "hatchLabel": "hatch",
+    "reactionWhileProcessing": true,
+    "maxCommentLength": 60000
+  },
+  "agent": {
+    "piCommand": "bunx pi",
+    "timeoutMs": 900000,
+    "skills": false,
+    "extensions": true,
+    "tools": ["read", "bash", "edit", "write", "grep", "glob", "ls"]
+  },
+  "runtime": {
+    "logLevel": "info",
+    "logJson": false,
+    "dryRun": false
+  }
+}

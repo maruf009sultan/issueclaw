@@ -1,0 +1,54 @@
+{
+  "name": "issueclaw",
+  "version": "2.0.0",
+  "description": "IssueClaw — AI assistant that lives in your GitHub Issues. Multi-provider, persistent memory, two modes (chat + agent). Runs entirely on GitHub Actions.",
+  "type": "module",
+  "license": "MIT",
+  "author": "IssueClaw",
+  "keywords": [
+    "ai",
+    "agent",
+    "github",
+    "issues",
+    "actions",
+    "llm",
+    "openai",
+    "anthropic",
+    "groq",
+    "gemini",
+    "automation",
+    "issueclaw"
+  ],
+  "scripts": {
+    "start": "bun run src/cli.ts",
+    "dev": "bun run src/cli.ts --dry-run",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "biome check src tests scripts",
+    "lint:fix": "biome check --write --unsafe src tests scripts",
+    "typecheck": "bun x tsc --noEmit",
+    "preinstall:hook": "bun run src/lifecycle/preinstall.ts",
+    "main:hook": "bun run src/lifecycle/main.ts",
+    "build": "bun build src/cli.ts --outdir dist --target=node",
+    "clean": "rm -rf dist coverage .vitest"
+  },
+  "dependencies": {
+    "@earendil-works/pi-coding-agent": "^0.80.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.1.10",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5"
+  },
+  "engines": {
+    "bun": ">=1.1.0",
+    "node": ">=20.0.0"
+  },
+  "bin": {
+    "issueclaw": "./src/cli.ts"
+  }
+}
