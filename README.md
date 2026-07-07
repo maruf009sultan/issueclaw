@@ -24,7 +24,7 @@
 
 ---
 
-## 🤔 What is IssueClaw?
+## 🤔 What is IssueClaw? 
 
 IssueClaw is an **AI assistant that lives inside your GitHub repo**. You talk to it by opening issues. It responds by commenting. It remembers everything. It can even edit your code.
 
